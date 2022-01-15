@@ -8,9 +8,16 @@ public class Conn
     {
         try
         {
+
             Class.forName("com.mysql.cj.jdbc.Driver");
-            c=DriverManager.getConnection("jdbc:mysql://localhost:3306/lib","root","09042001");
+            c=DriverManager.getConnection("jdbc:mysql://localhost:3306","root","09042001");
             s=c.createStatement();
+
+            String str ="CREATE DATABASE IF NOT EXISTS lib";
+            s.executeUpdate(str);
+            str="USE lib";
+            s.executeUpdate(str);
+
         }
         catch (Exception ae)
         {

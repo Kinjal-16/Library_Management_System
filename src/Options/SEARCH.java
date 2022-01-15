@@ -4,43 +4,72 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class SEARCH implements ActionListener {
-    JFrame f1;
-    JLabel l1;
-    JButton b1,b2;
+public class SEARCH implements ActionListener{
+    static JFrame f1,f2;
+    static JLabel l1,l2;
+    static JButton b1,b2;
+    JTextField t;
+    static JPanel p,p2;
+    JComboBox List;
+    String Name;
     SEARCH()
     {
+
+        String options[] ={"Book's name","Author's name"};
+        Name = options[0];
+        List = new JComboBox(options);
+
+        p.add(List);
+        List.addActionListener(this);
+        b1=new JButton("Search");
+        b1.addActionListener(this);
+    }
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource()==List) {
+            JComboBox cb = (JComboBox) e.getSource();
+            Name = (String) cb.getSelectedItem();
+
+        }
+        if(e.getSource()==b1)
+        {
+            if(Name.compareTo("Book's name")==0){N_Search ob = new N_Search(0);}
+            if(Name.compareTo("Author's name")==0){N_Search ob = new N_Search(1);}
+        }
+        if(e.getSource()==b2)
+        {
+            System.out.println("Test");
+        }
+
+    }
+
+
+
+
+
+    public static void main(String args[]){
+
+
         f1=new JFrame("Search for a book");
         f1.setLayout(null);
-        l1= new JLabel("Choose one of the following option for Searching  :-");
-        l1.setBounds(200,100,600,100);
-        l1.setFont(new Font("serif",Font.BOLD,25));
-        b1=new JButton("Name of the book");
-        b2=new JButton("Name of the Author");
-        b1.setFont(new Font("serif",Font.BOLD,20));
-        b2.setFont(new Font("serif",Font.BOLD,20));
-        b1.setBounds(200,200,500,100);
-        b2.setBounds(200,400,500,100);
-        f1.add(b1);
-        f1.add(b2);
-        f1.add(l1);
+        l1=new JLabel("How would you like to search ?");
+        l1.setForeground(Color.red);
+
+        p = new JPanel();
+        p.add(l1);
+
+        p.setSize(800,600);
+
+        SEARCH ob = new SEARCH();
+
+        f1.add(p);
+        p.add(b1);
         f1.setVisible(true);
+        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f1.setBounds(50,50,800,600);
 
-    }
-    public void actionPerformed(ActionEvent ae)
-    {
-        if (ae.getSource()==b1)
-        {
 
-        }
-        else if(ae.getSource()==b2)
-        {
-
-        }
-    }
-    public static void main(String args[]){
-        SEARCH OB=new SEARCH();
     }
 }

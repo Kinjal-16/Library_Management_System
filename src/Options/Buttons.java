@@ -5,12 +5,14 @@ import java.awt.Event.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
- class Buttons implements ActionListener {
+class Buttons implements ActionListener {
     JFrame f;//Object of JFrame class
     JLabel l1, l2;
     JButton b1, b2, b3, b4,b5;
-     Buttons() {
+     Buttons() throws SQLException {
+
          f = new JFrame("Library Management System");
          f.setBackground(Color.BLUE);
          f.setLayout(null);
@@ -68,7 +70,7 @@ import java.awt.event.ActionListener;
 
       public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == b1) {
-            new N_Search();
+            new SEARCH();
             f.setVisible(false);
         }
 
@@ -93,7 +95,7 @@ import java.awt.event.ActionListener;
               new New_Entry();
           }
     }
-    public static void main(String[] arg){
+    public static void main(String[] arg) throws SQLException {
         Buttons f = new Buttons();
     }
 }

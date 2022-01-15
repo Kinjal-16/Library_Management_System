@@ -13,14 +13,18 @@ public class N_Search implements ActionListener {
     JTextField t;
     JButton b1,b2;
     JTable T;
-
-    N_Search()
+    int options;
+    N_Search(int n)
     {
+        options=n;
         f = new JFrame("Searching for a book");
         f.setLayout(null);
         l1=new JLabel();
         l1.setBounds(0,0,1280,800);
-        l2=new JLabel("Enter the name of the book you want to search:-");
+        if( n==0)
+            l2=new JLabel("Please enter the book's name");
+        else
+            l2=new JLabel("Please enter the author's name");
         l2.setBounds(200,100,600,50);
         l2.setFont(new Font("serif",Font.BOLD,25));
         t=new JTextField();
@@ -57,10 +61,14 @@ public class N_Search implements ActionListener {
 
         if(ae.getSource()==b1)
         {
+            String str;
             try {
                 String ss = t.getText();
-
-                String str = "SELECT * FROM BOOKS WHERE NAME ='" + ss + "'";
+                if(options==0){
+                    str = "SELECT * FROM BOOKS WHERE NAME ='" + ss + "'";}
+                else{
+                    str = "SELECT * FROM BOOKS WHERE AUTHOR ='" + ss + "'";
+                }
                 Conn con = new Conn();
                 ResultSet rs = con.s.executeQuery(str);
                 if(rs.next())
@@ -93,6 +101,6 @@ public class N_Search implements ActionListener {
     }
     public  static void main(String args[])
     {
-        N_Search ob = new N_Search();
+        N_Search ob = new N_Search(0);
     }
 }
