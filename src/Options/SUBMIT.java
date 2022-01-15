@@ -72,7 +72,7 @@ public class SUBMIT implements ActionListener
                 String str1 = t1.getText();
                 String str3 = t2.getText();
                 try {
-                    ResultSet rs = con.s.executeQuery("SELECT * FROM BOOKS where NAME = '" + str1 + "'");
+                    rs = con.s.executeQuery("SELECT * FROM BOOKS where NAME = '" + str1 + "'");
                 }
                 catch (Exception e)
                 {
