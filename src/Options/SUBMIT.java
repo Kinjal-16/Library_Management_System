@@ -87,7 +87,7 @@ public class SUBMIT implements ActionListener
                         long difference=(date2.getTime()-date1.getTime());
                         TimeUnit unit = TimeUnit.DAYS;
                         long  diff= unit.convert(difference, TimeUnit.MILLISECONDS);
-                        
+
 
 
                         String str5="DELETE FROM Issue_time WHERE Student_name='"+str3+"'"+"AND Book_name ='"+str1+"'";

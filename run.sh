@@ -1,0 +1,1 @@
+docker run --name Library_Management_System -p 3306:3306 -e MYSQL_ROOT_PASSWORD=09042001 -d mysql
