@@ -8,13 +8,28 @@ import java.util.*;
 
 public class S_List
 {
+
     JFrame f;
     JTable t;
+    ResultSet r;
+    JButton b;
     S_List() throws SQLException {
+
         f=new JFrame("Student List");
         String S = "SELECT * FROM STUDENTS";
         Conn c = new Conn();
-        ResultSet r = c.s.executeQuery("SELECT COUNT(*) FROM STUDENTS");
+
+        try {
+            r = c.s.executeQuery("SELECT COUNT(*) FROM STUDENTS");
+        }
+
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "No student info found");
+            new Buttons();
+
+        }
+
         r.next();
         int len = r.getInt("count(*)");
         ResultSet data = c.s.executeQuery(S);

@@ -9,10 +9,11 @@ import java.time.LocalDate;
 
 public class ISSUE implements ActionListener
 {
-    JButton b;
+    JButton b,b3;
     JTextField t1,t2;
     JFrame f;
     String b1,b2,str3,str,str1;
+    ResultSet rs,r;
     ISSUE()
     {
         f=new JFrame("ISSUE A NEW BOOK");
@@ -40,10 +41,14 @@ public class ISSUE implements ActionListener
         f.add(l1);
         b=new JButton("Submit");
         b.setBounds(300,400,100,60);
+        b3=new JButton("Exit");
+        b3.setBounds(300,500,100,60);
         f.add(b);
+        f.add(b3);
         b.addActionListener(this);
-
+        b3.addActionListener(this);
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
 
@@ -52,13 +57,30 @@ public class ISSUE implements ActionListener
     {
         if(ae.getSource()==b)
         {
+
         try {
             Conn con = new Conn();
             Conn con2 = new Conn();
             str1 = t1.getText();
             str = t2.getText();
-            ResultSet rs  = con.s.executeQuery("SELECT * FROM BOOKS where NAME = '"+str1+"'");
-            ResultSet r  = con2.s.executeQuery("SELECT * FROM STUDENTS where NAME = '"+str+"'");
+            try {
+                rs = con.s.executeQuery("SELECT * FROM BOOKS where NAME = '" + str1 + "'");
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Sorry!No records of book found");
+                f.setVisible(false);
+                new Buttons();
+            }
+            try {
+                r = con2.s.executeQuery("SELECT * FROM STUDENTS where NAME = '" + str + "'");
+                f.setVisible(false);
+                new Buttons();
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Sorry!No records of student found");
+            }
 
             if(rs.next() && r.next()) {
                 b1 = r.getString(5);
@@ -103,7 +125,18 @@ public class ISSUE implements ActionListener
         }
         catch (Exception error){
             error.printStackTrace();
-        }}}
+        }
+        }
+        if(ae.getSource()==b3)
+        {
+            f.setVisible(false);
+            try {
+                new Buttons();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
     void Time_of_issue() throws SQLException {
         String str = """
 CREATE TABLE IF NOT EXISTS Issue_time (

@@ -6,6 +6,7 @@ import java.awt.Event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 public class N_Search implements ActionListener {
     JFrame f;
@@ -42,7 +43,7 @@ public class N_Search implements ActionListener {
         f.setVisible(true);
         f.setBounds(0,100,1280,600);
         f.add(l1);
-
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
     public void actionPerformed(ActionEvent ae)
@@ -95,9 +96,21 @@ public class N_Search implements ActionListener {
             catch (Exception event)
             {
                 event.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Sorry!Records not found");
             }
 
         }
+        if(ae.getSource()==b2)
+        {
+            f.setVisible(false);
+            try {
+                new Buttons();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+
     }
     public  static void main(String args[])
     {

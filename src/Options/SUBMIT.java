@@ -5,6 +5,7 @@ import java.awt.Event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -13,10 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 public class SUBMIT implements ActionListener
 {
-    JButton b;
+    JButton b,b2;
     JTextField t1,t2;
     JFrame f;
     int c=0;
+    ResultSet rs,rs2;
     SUBMIT()
     {
         f=new JFrame("SUBMIT A  BOOK");
@@ -45,10 +47,16 @@ public class SUBMIT implements ActionListener
         f.add(l1);
         b=new JButton("Submit");
         b.setBounds(200,400,100,60);
+        b2= new JButton("Exit");
+        b2.setBounds(400,400,100,60);
+
         f.add(b);
+        f.add(b2);
         b.addActionListener(this);
+        b2.addActionListener(this);
 
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
 
@@ -63,8 +71,24 @@ public class SUBMIT implements ActionListener
                 Conn con3 = new Conn();
                 String str1 = t1.getText();
                 String str3 = t2.getText();
-                ResultSet rs = con.s.executeQuery("SELECT * FROM BOOKS where NAME = '" + str1 + "'");
-                ResultSet rs2 = con2.s.executeQuery("SELECT * FROM Issue_time where Student_name = '" + str3 + "'");
+                try {
+                    ResultSet rs = con.s.executeQuery("SELECT * FROM BOOKS where NAME = '" + str1 + "'");
+                }
+                catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, "Sorry!Records of books not found");
+                    f.setVisible(false);
+                    new Buttons();
+                }
+                try {
+                    rs2 = con2.s.executeQuery("SELECT * FROM Issue_time where Student_name = '" + str3 + "'");
+                }
+                catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, "Sorry!Records of students not found");
+                    f.setVisible(false);
+                    new Buttons();
+                }
                 int flag = 0;
                 while (rs2.next()) {
                     String str = rs2.getString(2);
@@ -132,7 +156,20 @@ public class SUBMIT implements ActionListener
             }
             catch (Exception error){
                 error.printStackTrace();
-            }}}
+                JOptionPane.showMessageDialog(null, "Records Not found");
+            }}
+        if(ae.getSource()==b2)
+        {
+
+                f.setVisible(false);
+                try {
+                    new Buttons();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+        }
+    }
     public Date convertToDateViaInstant(LocalDate dateToConvert) {
         return java.util.Date.from(dateToConvert.atStartOfDay()
                 .atZone(ZoneId.systemDefault())

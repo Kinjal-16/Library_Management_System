@@ -17,7 +17,15 @@ public class SEARCH implements ActionListener{
     String Name;
     SEARCH()
     {
+        f1=new JFrame("Search for a book");
+        f1.setLayout(null);
+        l1=new JLabel("How would you like to search ?");
+        l1.setForeground(Color.red);
 
+        p = new JPanel();
+        p.add(l1);
+
+        p.setSize(800,600);
         String options[] ={"Book's name","Author's name"};
         Name = options[0];
         List = new JComboBox(options);
@@ -26,6 +34,11 @@ public class SEARCH implements ActionListener{
         List.addActionListener(this);
         b1=new JButton("Search");
         b1.addActionListener(this);
+        f1.add(p);
+        p.add(b1);
+        f1.setVisible(true);
+        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f1.setBounds(50,50,800,600);
     }
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==List) {
@@ -52,23 +65,11 @@ public class SEARCH implements ActionListener{
     public static void main(String args[]){
 
 
-        f1=new JFrame("Search for a book");
-        f1.setLayout(null);
-        l1=new JLabel("How would you like to search ?");
-        l1.setForeground(Color.red);
 
-        p = new JPanel();
-        p.add(l1);
-
-        p.setSize(800,600);
 
         SEARCH ob = new SEARCH();
 
-        f1.add(p);
-        p.add(b1);
-        f1.setVisible(true);
-        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f1.setBounds(50,50,800,600);
+
 
 
     }

@@ -12,6 +12,7 @@ public class New_Entry implements ActionListener
     JButton b1,b2;
     New_Entry()
     {
+
         L6 =new JLabel();
         L6.setBounds(100,40,800,600);
         f=new JFrame("Library Management System");

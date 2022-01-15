@@ -4,12 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class N_Student implements ActionListener {
     JFrame f;
     JLabel L1,L2,L3,L4,L5,L6,L7;
     JTextField T1,T2,T3,T4,T5,T6;
-    JButton b1,b2;
+    JButton b1,b2,b3;
     String a,b,c,d,e,g;
     N_Student()
     {
@@ -83,16 +84,18 @@ public class N_Student implements ActionListener {
         L6.add(T6);
 
         b1=new JButton("ADD DETAILS");
-        b1.setBounds(100,500,200,30);
+        b1.setBounds(100,500,150,30);
         b1.setFont(new Font("serif",Font.BOLD,15));
         b1.addActionListener(this);
         L6.add(b1);
 
         b2=new JButton("EXIT");
-        b2.setBounds(100,550,200,30);
+        b2.setBounds(300,500,150,30);
         b2.setFont(new Font("serif",Font.BOLD,15));
         b2.addActionListener(this);
         L6.add(b2);
+
+
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("img2.jpg"));
         Image i2 = i1.getImage().getScaledInstance(800, 600, Image.SCALE_DEFAULT);
@@ -170,6 +173,11 @@ CREATE TABLE IF NOT EXISTS STUDENTS (
         else
         {
             f.setVisible(false);
+            try {
+                new Buttons();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
     }
