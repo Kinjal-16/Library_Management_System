@@ -59,7 +59,6 @@ public class S_List
         f.setSize(500, 200);
 
         f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
     }

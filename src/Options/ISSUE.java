@@ -74,12 +74,13 @@ public class ISSUE implements ActionListener
             }
             try {
                 r = con2.s.executeQuery("SELECT * FROM STUDENTS where NAME = '" + str + "'");
-                f.setVisible(false);
-                new Buttons();
+
             }
             catch (Exception e)
             {
                 JOptionPane.showMessageDialog(null, "Sorry!No records of student found");
+                f.setVisible(false);
+                new Buttons();
             }
 
             if(rs.next() && r.next()) {
@@ -106,18 +107,20 @@ public class ISSUE implements ActionListener
                         JOptionPane.showMessageDialog(null, "The book is ready to be Published");
                         f.setVisible(false);
 
-                        new ISSUE();
+
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Sorry! All copies of the book are issued");
                         f.setVisible(false);
+
                     }
                 }
             }
             else
             {
                 JOptionPane.showMessageDialog(null, "Invalid student's name ot Book's name");
+                f.setVisible(false);
 
-                new ISSUE();
             }
 
 
@@ -126,6 +129,7 @@ public class ISSUE implements ActionListener
         catch (Exception error){
             error.printStackTrace();
         }
+        new ISSUE();
         }
         if(ae.getSource()==b3)
         {

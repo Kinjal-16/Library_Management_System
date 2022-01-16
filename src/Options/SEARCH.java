@@ -50,6 +50,7 @@ public class SEARCH implements ActionListener{
         {
             if(Name.compareTo("Book's name")==0){N_Search ob = new N_Search(0);}
             if(Name.compareTo("Author's name")==0){N_Search ob = new N_Search(1);}
+            f1.setVisible(false);
         }
         if(e.getSource()==b2)
         {
